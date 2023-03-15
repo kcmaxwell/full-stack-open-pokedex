@@ -2,7 +2,7 @@
 
 echo "Hello from shell script"
 
-RESULT=$(curl localhost:5000/health | grep "ok")
+RESULT=$(curl localhost:8080/health | grep "ok")
 
 echo
 if [ "$RESULT" != "ok" ]; then
