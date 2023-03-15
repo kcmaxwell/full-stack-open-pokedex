@@ -2,4 +2,13 @@
 
 echo "Hello from shell script"
 
-exit 0  # exit status 0 means that the script "succeeds"
+RESULT=$(curl localhost:5000/health | grep "ok")
+
+echo
+if [ "$RESULT" != "ok" ]; then
+  echo "Failed"
+  exit 1
+else
+  echo "Success"
+  exit 0
+fi
