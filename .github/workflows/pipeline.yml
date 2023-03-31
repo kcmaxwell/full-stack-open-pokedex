@@ -33,9 +33,10 @@ jobs:
           wait-on: http://localhost:5000
       - name: Bump version and push tag
         uses: anothrNick/github-tag-action@8c8163ef62cf9c4677c8e800f36270af27930f42
-        if: ${{ github.event_name == 'push' }}
+        if: ${{ github.event_name == 'push' && contains($COMMIT_MESSAGES, '#skip') != true}}
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           DEFAULT_BUMP: patch
+          COMMIT_MESSAGES: ${{ join(github.event.commits.*.message, ' ') }}
 
       
