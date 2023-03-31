@@ -31,3 +31,11 @@ jobs:
           build: npm run build
           start: npm run start-prod
           wait-on: http://localhost:5000
+      - name: Bump version and push tag
+        uses: anothrNick/github-tag-action@8c8163ef62cf9c4677c8e800f36270af27930f42
+        if: ${{ github.event_name == 'push' && contains(join(github.event.commits.*.message, ' '), '#skip') != true}}
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          DEFAULT_BUMP: patch
+
+      
