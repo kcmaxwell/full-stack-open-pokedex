@@ -34,9 +34,9 @@ jobs:
   tag_release:
     needs: [simple_deployment_pipeline]
     runs-on: ubuntu-20.04
-    steps: ${{ github.event_name == 'push' }}
+    steps:
       - name: Bump version and push tag
-        if: 
+        if: ${{ github.event_name == 'push' }}
         uses: anothrNick/github-tag-action@1.61.0
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
